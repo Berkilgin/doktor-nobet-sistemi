@@ -1,0 +1,146 @@
+[
+{
+    "model": "core.doktor",
+    "pk": 17,
+    "fields": {
+        "user": 18,
+        "ad_soyad": "Kerim Berkay Öner",
+        "kidem": "KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 18,
+    "fields": {
+        "user": 19,
+        "ad_soyad": "Zafer Kadirhan",
+        "kidem": "KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 19,
+    "fields": {
+        "user": 20,
+        "ad_soyad": "Yusuf Þimþek",
+        "kidem": "KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 20,
+    "fields": {
+        "user": 21,
+        "ad_soyad": "Mehmet Can Uluçay",
+        "kidem": "KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 21,
+    "fields": {
+        "user": 22,
+        "ad_soyad": "Ayþe Nur Tokmak",
+        "kidem": "KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 22,
+    "fields": {
+        "user": 23,
+        "ad_soyad": "Ahmet Emin Yýlmaz",
+        "kidem": "ORTA_KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 23,
+    "fields": {
+        "user": 24,
+        "ad_soyad": "Yaðýz Yýldýrým",
+        "kidem": "ORTA_KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 24,
+    "fields": {
+        "user": 25,
+        "ad_soyad": "Barýþ Karakoç",
+        "kidem": "ORTA_KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 25,
+    "fields": {
+        "user": 26,
+        "ad_soyad": "Ahmet Orkun Özdemir",
+        "kidem": "ORTA_KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 26,
+    "fields": {
+        "user": 27,
+        "ad_soyad": "Berk Ilgýn Öner",
+        "kidem": "ORTA_KIDEMLI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 27,
+    "fields": {
+        "user": 28,
+        "ad_soyad": "Yiðit Baki",
+        "kidem": "ACEMI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 28,
+    "fields": {
+        "user": 29,
+        "ad_soyad": "Fatih Arda Polat",
+        "kidem": "ACEMI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 29,
+    "fields": {
+        "user": 30,
+        "ad_soyad": "Efecan Özdemir",
+        "kidem": "ACEMI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 30,
+    "fields": {
+        "user": 31,
+        "ad_soyad": "BerkeCömertoðlu",
+        "kidem": "ACEMI"
+    }
+},
+{
+    "model": "core.doktor",
+    "pk": 31,
+    "fields": {
+        "user": 32,
+        "ad_soyad": "Yusuf Koç",
+        "kidem": "ACEMI"
+    }
+},
+{
+    "model": "core.hastaneayarlari",
+    "pk": 1,
+    "fields": {
+        "gunluk_doktor_sayisi": 4,
+        "minimum_dinlenme_gunu": 2,
+        "aylik_izin_limiti": 4
+    }
+}
+]

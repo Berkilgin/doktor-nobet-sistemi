@@ -214,7 +214,7 @@ def export_takvim_excel(request, yil, ay):
 # --- GEÇİCİ YÖNETİCİ OLUŞTURMA FONKSİYONU ---
 def create_superuser_gecici(request):
     ADMIN_USERNAME = 'admin'  # Canlı site için admin kullanıcı adın
-    ADMIN_PASSWORD = 'mMavisuluk23' # MUTLAKA GÜÇLÜ VE UNUTMAYACAĞIN BİR ŞİFRE SEÇ!
+    ADMIN_PASSWORD = 'Mavisuluk23' # MUTLAKA GÜÇLÜ VE UNUTMAYACAĞIN BİR ŞİFRE SEÇ!
     ADMIN_EMAIL = 'berkoner05@gmail.com' # Kendi e-posta adresini yazabilirsin
 
     # Kullanıcı zaten var mı diye kontrol et, varsa tekrar oluşturma
