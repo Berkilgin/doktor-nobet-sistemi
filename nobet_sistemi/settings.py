@@ -19,6 +19,10 @@ RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
+# --- YENİ EKLENECEK SATIR ---
+# Güvenlik için, manuel olarak da host adımızı ekleyelim.
+ALLOWED_HOSTS.append('doktor-nobet-sistemi.onrender.com')
+
 # --- UYGULAMA TANIMLARI ---
 INSTALLED_APPS = [
     'core.apps.CoreConfig',
