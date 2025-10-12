@@ -41,3 +41,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # --- YÖNLENDİRME ---
 LOGIN_REDIRECT_URL = 'doktor_paneli_redirect'
 LOGOUT_REDIRECT_URL = 'login'
+
+# --- YENİ EKLENECEK SATIR ---
+# Django'ya bizim özel giriş sayfamızın 'login' olduğunu söyle.
+LOGIN_URL = 'login'
