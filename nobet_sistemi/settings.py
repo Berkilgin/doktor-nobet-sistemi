@@ -13,7 +13,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'RENDER' not in os.environ
 
 # Sunucunun domain adını ve Render'ın kendi verdiği adresi buraya ekleyeceğiz.
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'doktor-nobet-sistemi.onrender.com', # Sitenizin tam adını buraya ekleyin
+]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
