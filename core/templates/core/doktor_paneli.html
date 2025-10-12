@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% block title %}Doktor Paneli{% endblock %}
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <a href="{% url 'doktor_paneli' yil=onceki_yil ay=onceki_ay %}" style="text-decoration: none; font-size: 1.5em;">❮</a>
+        <h1 style="margin: 0;">İzin Taleplerim: {{ gosterilecek_ay_ismi }} {{ yil }}</h1>
+        <a href="{% url 'doktor_paneli' yil=sonraki_yil ay=sonraki_ay %}" style="text-decoration: none; font-size: 1.5em;">❯</a>
+    </div>
+    
+    <div class="info" style="background-color: #e7f3fe; border-left: 6px solid #2196F3; padding: 15px; margin-bottom: 20px;">
+        <p>Hoş Geldiniz, <strong>Dr. {{ doktor.ad_soyad }}</strong> (Kıdem: {{ doktor.get_kidem_display }})</p>
+    </div>
+
+    <ul style="list-style-type: none; padding-left: 0; border: 1px solid #eee; border-radius: 5px; margin-bottom: 30px;">
+        {% for izin in mevcut_izinler %}
+            <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee;">
+                <span>❌ {{ izin.tarih|date:"d F Y, l" }}</span>
+                <form action="{% url 'izin_sil' izin_id=izin.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" style="background-color: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Sil</button>
+                </form>
+            </li>
+        {% empty %}
+            <li style="padding: 15px; color: #6c757d;">Bu ay için kayıtlı izin talebiniz bulunmamaktadır.</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post" style="background: #f8f9fa; padding: 20px; border-radius: 8px; border: 1px solid #dee2e6;">
+        {% csrf_token %}
+        <h3>Yeni İzin Talebi Ekle</h3>
+        <label for="id_tarih">İzin İstediğiniz Tarih:</label>
+        <input type="date" name="tarih" id="id_tarih" required style="padding: 8px; border-radius: 4px; border: 1px solid #ccc; margin-right: 10px;">
+        <button type="submit" style="padding: 8px 15px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Talep Ekle</button>
+    </form>
+{% endblock %}

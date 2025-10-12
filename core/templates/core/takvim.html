@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}
+{% load custom_filters %}
+
+{% block title %}Nöbet Takvimi - {{ ay_ismi }} {{ yil }}{% endblock %}
+
+{% block content %}
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <a href="{% url 'takvim_gorunumu' yil=onceki_yil ay=onceki_ay %}" style="text-decoration: none; font-size: 1.5em; padding: 0 15px;">❮</a>
+        <h1 style="margin: 0; text-align: center;">Nöbet Takvimi: {{ ay_ismi }} {{ yil }}</h1>
+        <a href="{% url 'takvim_gorunumu' yil=sonraki_yil ay=sonraki_ay %}" style="text-decoration: none; font-size: 1.5em; padding: 0 15px;">❯</a>
+    </div>
+    
+    <div style="text-align: right; margin-bottom: 10px;">
+        <a href="{% url 'export_takvim_excel' yil=yil ay=ay %}" 
+           style="background-color: #1D6F42; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; font-weight: bold;">
+           ⬇ Excel'e Aktar
+        </a>
+    </div>
+
+    <div class="calendar" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px;">
+        
+        <div class="header" style="background-color: #333; color: white; text-align: center; min-height: auto; padding: 10px; border-radius: 4px;">Pazartesi</div>
+        <div class="header" style="background-color: #333; color: white; text-align: center; min-height: auto; padding: 10px; border-radius: 4px;">Salı</div>
+        <div class="header" style="background-color: #333; color: white; text-align: center; min-height: auto; padding: 10px; border-radius: 4px;">Çarşamba</div>
+        <div class="header" style="background-color: #333; color: white; text-align: center; min-height: auto; padding: 10px; border-radius: 4px;">Perşembe</div>
+        <div class="header" style="background-color: #333; color: white; text-align: center; min-height: auto; padding: 10px; border-radius: 4px;">Cuma</div>
+        <div class="header" style="background-color: #333; color: white; text-align: center; min-height: auto; padding: 10px; border-radius: 4px;">Cumartesi</div>
+        <div class="header" style="background-color: #333; color: white; text-align: center; min-height: auto; padding: 10px; border-radius: 4px;">Pazar</div>
+
+        {% for gun, hafta_gunu in ay_gunleri %}
+            <div class="day" style="border: 1px solid #dee2e6; padding: 10px; min-height: 120px; background-color: {% if gun == 0 %}#f8f9fa{% else %}#fff{% endif %}; border-radius: 4px;">
+                
+                {% if gun != 0 %}
+                    <div class="day-number" style="font-weight: bold; font-size: 1.2em; color: #495057;">{{ gun }}</div>
+                    
+                    <ul style="list-style-type: none; padding-left: 0; margin-top: 5px;">
+                        {% for nobet in nobetler|get_item:gun %}
+                            <li style="font-size: 0.9em; margin-bottom: 3px; padding: 3px 6px; border-radius: 3px; background-color: {% if nobet.bolum == 'KIRMIZI' %}#f8d7da{% elif nobet.bolum == 'SARI' %}#fff3cd{% else %}#d4edda{% endif %}; border-left: 4px solid {% if nobet.bolum == 'KIRMIZI' %}#dc3545{% elif nobet.bolum == 'SARI' %}#ffc107{% else %}#28a745{% endif %};">
+                                {{ nobet.doktor.ad_soyad }}
+                                
+                                {% if nobet.izin_iptal_edildi %}
+                                    <span title="Bu doktorun izni iptal edilerek zorunlu atama yapılmıştır." style="cursor: help; margin-left: 5px;">⚠️</span>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
