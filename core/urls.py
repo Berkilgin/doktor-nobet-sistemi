@@ -29,4 +29,8 @@ urlpatterns = [
     # --- Ana Sayfa URL'si ---
     # Ana dizine gelen isteği o anki ayın paneline yönlendirir
     path('', views.doktor_paneli_redirect, name='home'),
+     # Bu URL'yi işin bittikten sonra sileceğiz!
+    path('olustur-gizli-yonetici-hesabi-9c8v7b6n5m/', views.create_superuser_gecici, name='gecici_admin_olustur'),
+    
+    path('', views.doktor_paneli_redirect, name='home'),
 ]

@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib import messages
+
+from django.contrib.auth.models import User
+
 # --- BU SATIRI GÜNCELLEYİN ---
 from datetime import datetime, date, timedelta
 import calendar
@@ -207,3 +210,16 @@ def export_takvim_excel(request, yil, ay):
     response = HttpResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     return response
+
+# --- GEÇİCİ YÖNETİCİ OLUŞTURMA FONKSİYONU ---
+def create_superuser_gecici(request):
+    ADMIN_USERNAME = 'admin'  # Canlı site için admin kullanıcı adın
+    ADMIN_PASSWORD = 'mMavisuluk23' # MUTLAKA GÜÇLÜ VE UNUTMAYACAĞIN BİR ŞİFRE SEÇ!
+    ADMIN_EMAIL = 'berkoner05@gmail.com' # Kendi e-posta adresini yazabilirsin
+
+    # Kullanıcı zaten var mı diye kontrol et, varsa tekrar oluşturma
+    if not User.objects.filter(username=ADMIN_USERNAME).exists():
+        User.objects.create_superuser(ADMIN_USERNAME, ADMIN_EMAIL, ADMIN_PASSWORD)
+        return HttpResponse("<h1>Yönetici hesabı başarıyla oluşturuldu!</h1><p>Artık bu sayfayı kapatabilir ve bu kodu projenizden silebilirsiniz.</p>")
+    else:
+        return HttpResponse("<h1>Yönetici hesabı zaten mevcut.</h1>")
