@@ -2,37 +2,270 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sisteme Giriş</title>
+    
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f4; margin: 0; }
-        .login-container { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 300px; }
-        h2 { text-align: center; color: #333; }
-        form { display: flex; flex-direction: column; }
-        label { margin-bottom: 5px; color: #555; }
-        input { padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; }
-        button { padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 1em; }
-        button:hover { background-color: #0056b3; }
-        .error { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 4px; margin-bottom: 15px; text-align: center; }
+        /* CSS STIL KODLARI */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        input:hover {
+            border-color: #c0c0c0;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .error {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .toggle-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            width: auto;
+            padding: 5px;
+            margin: 0;
+        }
+        
+        .toggle-btn:hover {
+            color: #667eea;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: none; /* Buton gölgesini iptal et */
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        
+        .remember-me input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+            box-shadow: none; /* Checkbox gölgesini iptal et */
+        }
+        
+        .remember-me label {
+            margin: 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* YENİ EKLENEN: Yönetici Alanı Stili */
+        .admin-section {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            input, button {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
+
 <body>
+    
     <div class="login-container">
+        
         <h2>Sisteme Giriş</h2>
         
         {% if form.errors %}
-            <p class="error">Kullanıcı adı veya şifre hatalı.</p>
+            <p class="error">❌ Kullanıcı adı veya şifre hatalı. Lütfen tekrar deneyin.</p>
         {% endif %}
         
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            <label for="id_username">Kullanıcı Adı:</label>
-            <input type="text" name="username" autofocus required id="id_username">
             
-            <label for="id_password">Şifre:</label>
-            <input type="password" name="password" required id="id_password">
+            <div class="form-group">
+                <label for="id_username">👤 Kullanıcı Adı:</label>
+                <input 
+                    type="text" 
+                    name="username" 
+                    autofocus 
+                    required 
+                    id="id_username"
+                    placeholder="Kullanıcı adınızı girin"
+                    autocomplete="username"
+                >
+            </div>
             
-            <button type="submit">Giriş Yap</button>
+            <div class="form-group">
+                <label for="id_password">🔒 Şifre:</label>
+                <div class="password-toggle">
+                    <input 
+                        type="password" 
+                        name="password" 
+                        required 
+                        id="id_password"
+                        placeholder="Şifrenizi girin"
+                        autocomplete="current-password"
+                    >
+                    <button type="button" class="toggle-btn" onclick="togglePassword()">
+                        👁️
+                    </button>
+                </div>
+            </div>
+            
+            <div class="remember-me">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Beni Hatırla</label>
+            </div>
+            
+            <button type="submit">🚀 Giriş Yap</button>
         </form>
+
+        <div class="admin-section">
+            <p>Sistem Yöneticisi misiniz?</p>
+            <p>Yönetici bilgilerinizle de yukarıdaki formdan giriş yapabilirsiniz.</p>
+            <p style="font-size: 11px; margin-top: 4px;">(Sistem sizi otomatik olarak panele yönlendirecektir)</p>
+        </div>
+
     </div>
+    
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('id_password');
+            const toggleBtn = document.querySelector('.toggle-btn');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+        
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const username = document.getElementById('id_username').value.trim();
+            const password = document.getElementById('id_password').value;
+            
+            if (username === '' || password === '') {
+                e.preventDefault();
+                alert('⚠️ Lütfen tüm alanları doldurun!');
+            }
+        });
+    </script>
 </body>
 </html>

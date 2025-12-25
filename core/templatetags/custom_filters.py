@@ -1,6 +1,6 @@
-from django.template import Library
+from django import template
 
-register = Library()
+register = template.Library()
 
 @register.filter
 def get_item(dictionary, key):
